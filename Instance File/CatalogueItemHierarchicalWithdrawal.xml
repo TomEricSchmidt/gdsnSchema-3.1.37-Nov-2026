@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><catalogue_item_hierarchical_withdrawal:catalogueItemHierarchicalWithdrawalMessage xmlns:catalogue_item_hierarchical_withdrawal="urn:gs1:gdsn:catalogue_item_hierarchical_withdrawal:xsd:3" xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:gs1:gdsn:catalogue_item_hierarchical_withdrawal:xsd:3 ../Schemas/gs1/gdsn/CatalogueItemHierarchicalWithdrawal.xsd">
+<sh:StandardBusinessDocumentHeader>
+    <sh:HeaderVersion>1.0</sh:HeaderVersion>
+    <sh:Sender>
+       <sh:Identifier Authority="GS1">8712345678913</sh:Identifier>
+    </sh:Sender>
+    <sh:Receiver>
+       <sh:Identifier Authority="GS1">9712345678912</sh:Identifier>
+    </sh:Receiver>
+    <sh:DocumentIdentification>
+       <sh:Standard>GS1</sh:Standard>
+       <sh:TypeVersion>3.1</sh:TypeVersion>
+       <sh:InstanceIdentifier>20071101</sh:InstanceIdentifier>
+      <sh:Type>catalogueItemHierarchicalWithdrawal</sh:Type>
+       <sh:CreationDateAndTime>2011-03-11T11:00:00.000-05:00</sh:CreationDateAndTime>
+    </sh:DocumentIdentification>
+</sh:StandardBusinessDocumentHeader>
+    <transaction>
+        <transactionIdentification>
+            <entityIdentification>20071101</entityIdentification>
+            <contentOwner>
+                <gln>1313131313131</gln>
+            </contentOwner>
+        </transactionIdentification>
+        <documentCommand>
+            <documentCommandHeader type="ADD">
+                <documentCommandIdentification>
+                    <entityIdentification>20071101</entityIdentification>
+                    <contentOwner>
+                        <gln>8712345678913</gln>
+                    </contentOwner>
+                </documentCommandIdentification>
+            </documentCommandHeader>
+            <catalogue_item_hierarchical_withdrawal:catalogueItemHierarchicalWithdrawal>
+                <creationDateTime>2011-03-11T11:00:00.000-05:00</creationDateTime>
+                <documentStatusCode>ORIGINAL</documentStatusCode>
+                <catalogueItemHierarchicalWithdrawalIdentification>
+                    <entityIdentification>20071101</entityIdentification>
+                    <contentOwner>
+                        <gln>8712345678913</gln>
+                    </contentOwner>
+                </catalogueItemHierarchicalWithdrawalIdentification>
+                <catalogueItemStateCode>REGISTERED</catalogueItemStateCode>
+                <hierarchyDeletionReasonCode>HIERARCHY_LINK_CORRECTION</hierarchyDeletionReasonCode>
+                <catalogueItemReference>
+                    <dataSource>8712345678913</dataSource>
+                    <gtin>00074562000525</gtin>
+                    <targetMarketCountryCode>528</targetMarketCountryCode>
+                </catalogueItemReference>
+                <dataRecipient>
+                    <gln>9712345678912</gln>
+                </dataRecipient>
+                <sourceDataPool>
+                    <gln>8712345678912</gln>
+                </sourceDataPool>
+            </catalogue_item_hierarchical_withdrawal:catalogueItemHierarchicalWithdrawal>
+        </documentCommand>
+    </transaction>
+</catalogue_item_hierarchical_withdrawal:catalogueItemHierarchicalWithdrawalMessage>

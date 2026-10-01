@@ -1,0 +1,4 @@
+
+BMS_GDSN_Catalogue_Item_Sync_d3-27p_i1-1_Dec_2023.pdf
+ReadMe.txt
+BMS_GDSN_Catalogue_Item_Sync_d3_27p_i1_1_Dec_2023_Implementers_Packet.zip
