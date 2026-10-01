@@ -91,6 +91,7 @@ def main():
     # 1. Alle globalen Komponenten einsammeln: (space, ns, name) -> Element
     comps = {}
     module_elements = []  # (ns, name)
+    version = etree.parse(os.path.join(SCHEMA_DIR, files[0])).getroot().get("version")
     for rel in files:
         root = etree.parse(os.path.join(SCHEMA_DIR, rel)).getroot()
         ns = root.get("targetNamespace")
@@ -172,7 +173,7 @@ def main():
     # 5. Modul-Extension-Typ anlegen und in die Owner-Typen einhängen
     ext = etree.Element("{%s}complexType" % XS, name=MODULE_EXT_TYPE, nsmap=NS)
     ann = etree.SubElement(etree.SubElement(ext, "{%s}annotation" % XS), "{%s}documentation" % XS)
-    ann.text = "Ersetzt shared_common:ExtensionType (xsd:any). Enthält alle GDSN TradeItem-Module 3.1.37."
+    ann.text = "Ersetzt shared_common:ExtensionType (xsd:any). Enthält alle GDSN TradeItem-Module %s." % version
     seq = etree.SubElement(ext, "{%s}sequence" % XS)
     for ns, name in sorted(module_elements, key=lambda x: x[1].lower()):
         etree.SubElement(seq, "{%s}element" % XS, ref=newname[("element", ns, name)], minOccurs="0")
@@ -246,13 +247,13 @@ def main():
         nsmap=NS,
         attributeFormDefault="unqualified",
         elementFormDefault="unqualified",
-        version="3.1.37",
+        version=version,
     )
     doc = etree.SubElement(etree.SubElement(schema, "{%s}annotation" % XS), "{%s}documentation" % XS)
     doc.text = (
-        "GS1 GDSN CatalogueItemNotification 3.1.37 inkl. StandardBusinessDocumentHeader und aller TradeItem-Module, "
-        "zu einer Datei ohne targetNamespace zusammengeführt (tools/build_cin_flat_xsd.py). "
-        "Namespace-qualifizierte Elemente der Original-Nachricht siehe Lobster/README.md."
+        "GS1 GDSN CatalogueItemNotification %s inkl. StandardBusinessDocumentHeader und aller TradeItem-Module, " % version
+        + "zu einer Datei ohne targetNamespace zusammengeführt (tools/build_cin_flat_xsd.py). "
+        + "Namespace-qualifizierte Elemente der Original-Nachricht siehe Lobster/README.md."
     )
     schema.append(root_el)
     for name in sorted(keep, key=str.lower):
