@@ -1,0 +1,3414 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:gdsn_message="urn:gs1:shared:shared_common:xsd:3" xml:lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+<title>Catalogue Item Notification Message</title>
+<style type="text/css">
+      body {font-family:"Arial";color:black;}
+      table {width:100%; font-size:10pt}
+      th {font-weight:bold; text-align:left}
+      .indent {width:6px;}
+      .label {width:24%}
+      .value {width:26%;}
+      .head1 {}
+      .head2 {background-color:#FFFF99}
+      .head3 {background-color:#660099; color:#FFFF99}
+      .head4 {background-color:#CCCC99}
+      .tagName {font-size:10pt; font-weight:bold}
+      .typeName {font-size:10pt; font-weight:bold}
+      .attributeName {width:30%; font-size:10pt; font-style: italic}
+      .attributeValue {width:40%; font-size:10pt; font-weight:bold}
+      .textValue {width:40%; font-size:10pt; font-weight:bold}
+      table.section { border: 2px solid black; background-color:#FFFF99}
+
+      table.section1 { border: 2px solid black; background-color:#D0FEFE}
+      table.section2 { border: 1px solid black; background-color:#D0FED0}
+      table.section3 { border: 1px solid black; background-color:#FEFEA0}
+      table.section4 { border: 1px solid black; background-color:#FFFF11}
+      table.section5 { border: 1px solid black; background-color:#FFFF99}
+
+      table.section6 { border: 1px solid black; background-color:#D0FEFE}
+      table.section7 { border: 1px solid black; background-color:#D0FED0}
+      table.section8 { border: 1px solid black; background-color:#FEFEA0}
+      table.section9 { border: 1px solid black; background-color:#FFFF11}
+      table.section10 { border: 1px solid black; background-color:#FFFF99}
+
+      table.subSection { border: 2px solid black; table-layout:fixed}
+      table.msgHead { border: 2px solid black; table-layout:fixed}
+      th.msgHead {font-size: 14pt}
+      th.subHead {font-weight:normal;text-indent:12px}
+      .horizLine {background-color:#CCCC99}
+    </style>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<table xmlns="" class="section1">
+<tr xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" xmlns:gdsn_common="urn:gs1:gdsn:gdsn_common:xsd:3" xmlns:catalogue_item_notification="urn:gs1:gdsn:catalogue_item_notification:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">catalogue_item_notification:catalogueItemNotificationMessage</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table xmlns:eanucc="urn:ean.ucc:2" class="msgHead">
+<tr>
+<td class="indent"></td><td class="label"></td><td class="value"></td><td class="label"></td><td class="value"></td>
+</tr>
+<tr>
+<th colspan="5" class="head2">Message Header, version 1.0</th>
+</tr>
+<tr>
+<th colspan="5" class="head2">Sender</th>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Identifier</th><td>8712345678913</td><th class="head1">Identifier Authority</th><td>GS1</td>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Contact</th><td></td><th class="head1">Contact Type</th><td></td>
+</tr>
+<tr>
+<th colspan="5" class="head2">Receiver</th>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Identifier</th><td>9712345678912</td><th class="head1">Identifier Authority</th><td>GS1</td>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Contact</th><td></td><th class="head1">Contact Type</th><td></td>
+</tr>
+<tr>
+<th colspan="5" class="head2">Document Identification</th>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Standard</th><td>GS1</td><th class="head1">Type Version</th><td>3.1</td>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Instance Identifier</th><td>20051101</td><th class="head1">Type</th><td>catalogueItemNotification</td>
+</tr>
+<tr>
+<td class="indent"></td><th class="head1">Multiple Type</th><td></td><th class="head1">Creation Date</th><td>March 11, 2011 11:00:00.000-05:00</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:shared_common="urn:gs1:shared:shared_common:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">transaction</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">transactionIdentification</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">entityIdentification</td><td class="textValue" width="70%">20051101</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">contentOwner</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">8712345678913</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section3">
+<tr xmlns:request_for_catalogue_item_notification="urn:gs1:gdsn:request_for_catalogue_item_notification:xsd:3" xmlns:registry_catalogue_item="urn:gs1:gdsn:registry_catalogue_item:xsd:3" xmlns:catalogue_item_subscription="urn:gs1:gdsn:catalogue_item_subscription:xsd:3" xmlns:catalogue_item_registration_response="urn:gs1:gdsn:catalogue_item_registration_response:xsd:3" xmlns:catalogue_item_publication="urn:gs1:gdsn:catalogue_item_publication:xsd:3" xmlns:catalogue_item_hierarchical_withdrawal="urn:gs1:gdsn:catalogue_item_hierarchical_withdrawal:xsd:3" xmlns:catalogue_item_confirmation="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">documentCommand</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">documentCommandHeader</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">type</td><td class="attributeValue">ADD</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">documentCommandIdentification</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">entityIdentification</td><td class="textValue" width="70%">20051101</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section6">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">contentOwner</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">8712345678913</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">catalogue_item_notification:catalogueItemNotification</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">catalogueItemNotificationIdentification</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">entityIdentification</td><td class="textValue" width="70%">20051101</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section6">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">contentOwner</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">8712345678913</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isReload</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr xmlns:trade_item="urn:gs1:gdsn:trade_item:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">catalogueItem</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">dataRecipient</td><td class="textValue" width="70%">9712345678912</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">sourceDataPool</td><td class="textValue" width="70%">7712345678944</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section6">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">catalogueItemState</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">catalogueItemStateCode</td><td class="textValue" width="70%">REGISTERED</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section6">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItem</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">contextIdentification<td class="indent"><td class="attributeValue">1</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isTradeItemABaseUnit</td><td class="textValue" width="70%">true</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isTradeItemAConsumerUnit</td><td class="textValue" width="70%">true</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isTradeItemADespatchUnit</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isTradeItemAnInvoiceUnit</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isTradeItemAnOrderableUnit</td><td class="textValue" width="70%">true</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemUnitDescriptorCode<td class="indent"><td class="attributeValue">BASE_UNIT_OR_EACH</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">informationProviderOfTradeItem</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">6612345678944</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">partyName</td><td class="textValue" width="70%">Food Service Distributor</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section8">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">partyRoleCode<td class="indent"><td class="attributeValue">INFORMATION_PROVIDER</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">manufacturerOfTradeItem</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">6612345678944</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">partyName</td><td class="textValue" width="70%">Camp</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">gdsnTradeItemClassification</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gpcCategoryCode</td><td class="textValue" width="70%">10000028</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gpcCategoryName</td><td class="textValue" width="70%">Cheese/Cheese Substitutes (Perishable)</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">targetMarket</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section8">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">targetMarketCountryCode<td class="indent"><td class="attributeValue">124</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemContactInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section8">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">contactTypeCode<td class="indent"><td class="attributeValue">CYC</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">8712345678913</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemContactInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section8">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">contactTypeCode<td class="indent"><td class="attributeValue">BVP</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gln</td><td class="textValue" width="70%">8712345678913</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">consumerProductVariantStartEffectiveDateTime</td><td class="textValue" width="70%">2013-01-10T12:00:01.000-05:00</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section8">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">extension</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:food_and_beverage_ingredient="urn:gs1:gdsn:food_and_beverage_ingredient:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">food_and_beverage_ingredient:foodAndBeverageIngredientModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">additiveInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">additiveName</td><td class="textValue" width="70%">Sodium Nitrate</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">levelOfContainmentCode<td class="indent"><td class="attributeValue">CONTAINS</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">foodAndBeverageIngredient</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">ingredientSequence</td><td class="textValue" width="70%">1</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">ingredientContentPercentage</td><td class="textValue" width="70%">80.00</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">ingredientName<td class="indent"><td class="attributeValue">Milk</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:diet_information="urn:gs1:gdsn:diet_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">diet_information:dietInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">dietInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">dietTypeDescription<td class="indent"><td class="attributeValue"> Suitable for Gluten Free Diets </td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">dietTypeInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">dietTypeCode<td class="indent"><td class="attributeValue">FREE_FROM_GLUTEN </td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:farming_and_processing_information="urn:gs1:gdsn:farming_and_processing_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">farming_and_processing_information:farmingAndProcessingInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">rawMaterialIrradiatedCode</td><td class="textValue" width="70%">FALSE</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemOrganicInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">organicClaim</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">organicClaimAgencyCode<td class="indent"><td class="attributeValue">999</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">organicPercentClaim</td><td class="textValue" width="70%">100</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">organicTradeItemCode<td class="indent"><td class="attributeValue">1</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemFarmingAndProcessing</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">preservationTechniqueCode<td class="indent"><td class="attributeValue">FREEZING</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:dairy_fish_meat_poultry="urn:gs1:gdsn:dairy_fish_meat_poultry:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">dairy_fish_meat_poultry:dairyFishMeatPoultryItemModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">dairyFishMeatPoultryInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">fatInMilkContent</td><td class="textValue" width="70%">10.00</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isHomogenised</td><td class="textValue" width="70%">TRUE</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:food_and_beverage_preparation_serving="urn:gs1:gdsn:food_and_beverage_preparation_serving:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">food_and_beverage_preparation_serving:foodAndBeveragePreparationServingModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">manufacturerPreparationTypeCode<td class="indent"><td class="attributeValue">UNPREPARED</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">servingQuantityInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">numberOfServingsPerPackage</td><td class="textValue" width="70%">6</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">numberOfServingsPerPackageMeasurementPrecisionCode<td class="indent"><td class="attributeValue">APPROXIMATELY</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">preparationServing</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">convenienceLevelPercent</td><td class="textValue" width="70%">100</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">preparationConsumptionPrecautions<td class="indent"><td class="attributeValue">Do Not Freeze</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">preparationTypeCode<td class="indent"><td class="attributeValue">BOIL</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">servingSuggestion<td class="indent"><td class="attributeValue">As a soup, or ingredient in many of your favourite recipes. Add simple garnishes to create signature soups</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:health_related_information="urn:gs1:gdsn:health_related_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">health_related_information:healthRelatedInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">healthRelatedInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutritionalLabelTypeCode<td class="indent"><td class="attributeValue">1</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:nutritional_information="urn:gs1:gdsn:nutritional_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutritional_information:nutritionalInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientHeader</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">preparationStateCode<td class="indent"><td class="attributeValue">AS_DRAINED</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientBasisQuantity<td class="indent"><td class="attributeValue">100</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">GRM</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientDetail</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientTypeCode<td class="indent"><td class="attributeValue">FIB-</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">dailyValueIntakePercent</td><td class="textValue" width="70%">20</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">measurementPrecisionCode<td class="indent"><td class="attributeValue">APPROXIMATELY</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">quantityContained<td class="indent"><td class="attributeValue">4.5</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">GRM</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientDetail</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientTypeCode<td class="indent"><td class="attributeValue">ENERC</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">dailyValueIntakePercent</td><td class="textValue" width="70%">10</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">measurementPrecisionCode<td class="indent"><td class="attributeValue">APPROXIMATELY</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">quantityContained<td class="indent"><td class="attributeValue">96</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">E14</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientDetail</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">nutrientTypeCode<td class="indent"><td class="attributeValue">FAT</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">dailyValueIntakePercent</td><td class="textValue" width="70%">10</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">measurementPrecisionCode<td class="indent"><td class="attributeValue">APPROXIMATELY</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section5">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">quantityContained<td class="indent"><td class="attributeValue">0.3</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">GRM</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:packaging_information="urn:gs1:gdsn:packaging_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packaging_information:packagingInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packaging</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isPackagingSuitableForAirShipment</td><td class="textValue" width="70%">FALSE</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packagingShapeCode<td class="indent"><td class="attributeValue">RECTANGULAR</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packagingTypeCode<td class="indent"><td class="attributeValue">BG</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packagingTypeDescription<td class="indent"><td class="attributeValue">Bag</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:packaging_marking="urn:gs1:gdsn:packaging_marking:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packaging_marking:packagingMarkingModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packagingMarking</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">hasBatchNumber</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isNetContentDeclarationIndicated</td><td class="textValue" width="70%">true</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isPackagingMarkedReturnable</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isPriceOnPack</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">packagingMarkedLabelAccreditationCode<td class="indent"><td class="attributeValue">UNIQUELY_FINNISH</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:trade_item_description="urn:gs1:gdsn:trade_item_description:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">trade_item_description:tradeItemDescriptionModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemDescriptionInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">additionalTradeItemDescription<td class="indent"><td class="attributeValue"> An Italian tradition full of diced carrots, kidney beans, peas and penne pasta</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">descriptionShort<td class="indent"><td class="attributeValue">Soup</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">functionalName<td class="indent"><td class="attributeValue">Soup</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">productRange</td><td class="textValue" width="70%">Healthy Options  </td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemDescription<td class="indent"><td class="attributeValue">Camp's Frozen Soup Homestyle Minestrone </td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">variantDescription<td class="indent"><td class="attributeValue">Homestyle Minestrone</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">brandNameInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">brandName</td><td class="textValue" width="70%">Camp's Frozen</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:marketing_information="urn:gs1:gdsn:marketing_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">marketing_information:marketingInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">marketingInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemFeatureBenefit<td class="indent"><td class="attributeValue">Consistent fresh-frozen quality featuring traditional and on-trend varieties.  Easy to prepare-simply add water. Less waste-use as little as half a tray. More than forty varieties to meet customer taste preferences.</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">languageCode</td><td class="attributeValue">en</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+<tr>
+<td class="attributeName">formattingPattern</td><td class="attributeValue"></td>
+</tr>
+<tr>
+<td class="attributeName">sequenceNumber</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:trade_item_measurements="urn:gs1:gdsn:trade_item_measurements:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">trade_item_measurements:tradeItemMeasurementsModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemMeasurements</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">depth<td class="indent"><td class="attributeValue">30</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">CMT</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">diameter<td class="indent"><td class="attributeValue">15</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">CMT</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">height<td class="indent"><td class="attributeValue">20</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">CMT</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">netContent<td class="indent"><td class="attributeValue">30</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">GRM</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section4">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">width<td class="indent"><td class="attributeValue">50</td></td></td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td class="attributeName">measurementUnitCode</td><td class="attributeValue">CMT</td>
+</tr>
+<tr>
+<td class="attributeName">codeListVersion</td><td class="attributeValue"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section2">
+<tr xmlns:variable_trade_item_information="urn:gs1:gdsn:variable_trade_item_information:xsd:3">
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">variable_trade_item_information:variableTradeItemInformationModule</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table class="section3">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">variableTradeItemInformation</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">isTradeItemAVariableUnit</td><td class="textValue" width="70%">false</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="section7">
+<tr>
+<td colspan="2">
+<table>
+<tr>
+<td width="40%" class="tagName">tradeItemSynchronisationDates</td><td width="60%" class="typeName" align="right">
+<replaceTypeName></replaceTypeName>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="indent"></td><td></td>
+</tr>
+<tr>
+<td class="indent"></td><td>
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">lastChangeDateTime</td><td class="textValue" width="70%">2013-01-10T12:00:01.000-05:00</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">effectiveDateTime</td><td class="textValue" width="70%">2013-02-10T12:00:01.000-05:00</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">gtin</td><td class="textValue" width="70%">00074562000525</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">creationDateTime</td><td class="textValue" width="70%">2011-03-11T11:00:00.000-05:00</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr>
+<td class="tagName" width="30%">documentStatusCode</td><td class="textValue" width="70%">ORIGINAL</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

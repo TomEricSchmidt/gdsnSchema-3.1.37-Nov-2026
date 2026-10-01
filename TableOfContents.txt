@@ -1,0 +1,64 @@
+
+Instance File
+    CatalogueItemSubscription.xml
+    RequestForCatalogueItemNotification.xml
+    CatalogueItemNotification.xml
+    CatalogueItemConfirmation_withWarning.xml
+    CatalogueItemConfirmation.xml
+    RegistryCatalogueItem.xml
+    CatalogueItemRegistrationResponse.xml
+    CatalogueItemHierarchicalWithdrawal.xml
+    CatalogueItemPublication.xml
+    GS1Response.xml
+
+HTML Sample
+    CatalogueItemSubscription_xml.html
+    RequestForCatalogueItemNotification_xml.html
+    CatalogueItemNotification_xml.html
+    CatalogueItemConfirmation_withWarning_xml.html
+    CatalogueItemConfirmation_xml.html
+    RegistryCatalogueItem_xml.html
+    CatalogueItemRegistrationResponse_xml.html
+    CatalogueItemHierarchicalWithdrawal_xml.html
+    CatalogueItemPublication_xml.html
+    GS1Response_xml.html
+
+Schemas
+
+  gs1\gdsn
+    CatalogueItemConfirmation.xsd, version 3.1.37
+    CatalogueItemHierarchicalWithdrawal.xsd, version 3.1.37
+    CatalogueItemNotification.xsd, version 3.1.37
+    CatalogueItemPublication.xsd, version 3.1.37
+    CatalogueItemRegistrationResponse.xsd, version 3.1.37
+    CatalogueItemSubscription.xsd, version 3.1.37
+    DairyFishMeatPoultryItemModule.xsd, version 3.1.37
+    DietInformationModule.xsd, version 3.1.37
+    FarmingAndProcessingInformationModule.xsd, version 3.1.37
+    FoodAndBeverageIngredientModule.xsd, version 3.1.37
+    FoodAndBeveragePreparationServingModule.xsd, version 3.1.37
+    GS1Response.xsd, version 3.1.37
+    GdsnCommon.xsd, version 3.1.37
+    HealthRelatedInformationModule.xsd, version 3.1.37
+    MarketingInformationModule.xsd, version 3.1.37
+    NutritionalInformationModule.xsd, version 3.1.37
+    PackagingInformationModule.xsd, version 3.1.37
+    PackagingMarkingModule.xsd, version 3.1.37
+    RegistryCatalogueItem.xsd, version 3.1.37
+    RequestForCatalogueItemNotification.xsd, version 3.1.37
+    TradeItem.xsd, version 3.1.37
+    TradeItemDescriptionModule.xsd, version 3.1.37
+    TradeItemMeasurementsModule.xsd, version 3.1.37
+    VariableTradeItemInformationModule.xsd, version 3.1.37
+
+  gs1\shared
+    SharedCommon.xsd, version 3.1.37
+
+  sbdh
+    BasicTypes.xsd
+    BusinessScope.xsd
+    DocumentIdentification.xsd
+    Manifest.xsd
+    Partner.xsd
+    StandardBusinessDocumentHeader.xsd
+
