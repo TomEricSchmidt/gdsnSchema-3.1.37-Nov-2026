@@ -43,17 +43,21 @@ if not schema.validate(doc):
 print("Beispiel ohne Namespaces gegen flaches Schema: gültig (%d Module)" % modules)
 
 # Namespaces laut Lobster/namespaces.csv wieder setzen -> muss gegen das Original-Schema gültig sein
-with open(os.path.join(ROOT, "Lobster", "namespaces.csv"), encoding="utf-8") as f:
-    ns_of = {line.split(";")[0]: line.strip().split(";")[3] for line in list(f)[1:]}
-root = doc.getroot()
-root.tag = "{%s}%s" % (ns_of[root.tag], root.tag)
-for el in root.iter("StandardBusinessDocumentHeader"):
-    for d in el.iter():
-        d.tag = "{%s}%s" % (ns_of["StandardBusinessDocumentHeader"], d.tag)
-for el in root.iter("catalogueItemNotification"):
-    el.tag = "{%s}%s" % (ns_of[el.tag], el.tag)
-for ext in root.iter("extension"):
-    for m in ext:
-        m.tag = "{%s}%s" % (ns_of[m.tag], m.tag)
-etree.XMLSchema(etree.parse(ORIG)).assertValid(doc)
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+from add_gdsn_namespaces import add_namespaces  # noqa: E402
+
+orig_schema = etree.XMLSchema(etree.parse(ORIG))
+orig_schema.assertValid(add_namespaces(doc))
 print("Nach Setzen der Namespaces aus namespaces.csv gegen Original-Schema: gültig")
+
+# Beispielnachricht Lobster/examples: flach gültig, mit Namespaces gültig, GDSN-Fassung aktuell
+example = os.path.join(ROOT, "Lobster", "examples", "CIN_Beispiel_flat.xml")
+example_gdsn = os.path.join(ROOT, "Lobster", "examples", "CIN_Beispiel_gdsn.xml")
+ex = etree.parse(example)
+schema.assertValid(ex)
+gdsn = add_namespaces(ex)
+orig_schema.assertValid(gdsn)
+if etree.tostring(gdsn, method="c14n") != etree.tostring(etree.parse(example_gdsn), method="c14n"):
+    sys.exit("CIN_Beispiel_gdsn.xml ist nicht aktuell: python3 tools/add_gdsn_namespaces.py "
+             "Lobster/examples/CIN_Beispiel_flat.xml Lobster/examples/CIN_Beispiel_gdsn.xml")
+print("Lobster/examples/CIN_Beispiel_flat.xml: gültig (flach und mit Namespaces gegen Original)")
