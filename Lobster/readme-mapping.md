@@ -6,6 +6,7 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 |---|---|---|
 | 1 | `isReload` aus MSGFN oder INITIAL_LOAD | offen |
 | 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | offen, Favorit: Uhrzeit bereits beim MATMAS-Import |
+| 3 | `tradeItemUnitDescriptorCode` aus ZZMEE: Ermittlung in die SAP-Schnittstelle verlagern | offen, Favorit: neues Feld in der Entität |
 
 ## 1. `isReload`: MSGFN oder INITIAL_LOAD?
 
@@ -67,3 +68,29 @@ Zu klären:
 - Welche weiteren Mappings lesen die umgestellten Felder und müssen angepasst werden?
 
 **Entscheidung:** offen (Favorit: Uhrzeit bereits beim MATMAS-Import ergänzen)
+
+## 3. `tradeItemUnitDescriptorCode`: Ermittlung aus ZZMEE
+
+**Frage:** Der Code wird im alten Mapping durch Abfrage des Quellfeldes ZZMEE im Bereich „Allgemeine Daten“ ausgewertet und so der GDSN-Code ermittelt. Wäre es nicht sinnvoller, diese Ermittlung in der SAP-Schnittstelle zu machen und in der Entität ein neues Feld dafür einzufügen?
+
+**Kontext:**
+
+- Ziel: `tradeItem/tradeItemUnitDescriptorCode` (Hierarchieebene des Artikels). Im Schema optional und als offene Codeliste (`GS1CodeType`) definiert – die XSD prüft die Werte also **nicht**; ungültige Codes fallen erst beim Datenpool auf. In der GDSN-Praxis wird das Feld je Hierarchieebene erwartet (mit dem Datenpool bestätigen).
+- GS1-Codewerte: `BASE_UNIT_OR_EACH`, `PACK_OR_INNER_PACK`, `CASE`, `DISPLAY_SHIPPER`, `PALLET`, `MIXED_MODULE`, `TRANSPORT_LOAD`.
+- In den newPIM-Entitäten gibt es derzeit kein Feld für den Code und kein Feld ZZMEE.
+
+**Vorschlag (Favorit):** Den GDSN-Code bereits beim Import aus SAP ermitteln und in einem neuen Feld der Entität ablegen (z. B. in `newpimsdm`, Gruppe `gdsnDaten`), als `enum` mit den GS1-Codewerten. Das CIN-Mapping übernimmt den Wert dann 1:1.
+
+| Vorteil | |
+|---|---|
+| Logik an einer Stelle | Zuordnung ZZMEE → GDSN-Code nicht mehr in jedem Ausgangsmapping |
+| Sichtbar und prüfbar | Code ist in newPIM sichtbar und kann dort kontrolliert oder korrigiert werden |
+| Gültige Werte | `enum` in der Entität verhindert ungültige Codes, die die XSD nicht abfängt |
+
+Zu klären:
+
+- Wo genau wird ermittelt: direkt in SAP (IDoc liefert den Code mit) oder im Lobster-Mapping `000-P1-MATMAS-ERP_to_newPIM-SDM`?
+- Zuordnungstabelle ZZMEE → GDSN-Code aus dem alten Mapping übernehmen und hier dokumentieren.
+- Name und Ort des neuen Felds in der Entität; Befüllung der Bestandsdaten.
+
+**Entscheidung:** offen (Favorit: Ermittlung beim Import, neues Feld in der Entität)
