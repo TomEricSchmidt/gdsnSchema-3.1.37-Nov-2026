@@ -25,6 +25,7 @@ Die Fassung mit **allen 76 GS1-Modulen** liegt auf dem Branch **`alle-module`**.
 - die XSD enthält **genau** die Module der Liste (meldet fehlende und überzählige),
 - die GS1-Beispiel-CIN, reduziert auf die gelisteten Module und ohne Namespaces, ist gegen die flache XSD gültig und mit Namespaces aus `namespaces.csv` wieder gegen das Original-Schema,
 - ein nicht gelistetes Modul wird von der flachen XSD abgelehnt.
+- die Beispielnachricht `examples/CIN_Beispiel_flat.xml` ist gegen die flache XSD gültig und mit Namespaces (`tools/add_gdsn_namespaces.py`) gegen das Original-Schema; `examples/CIN_Beispiel_gdsn.xml` ist aktuell.
 
 ## Was gegenüber den Original-Schemas geändert ist
 
@@ -51,6 +52,26 @@ Weil die Datei keinen Namespace hat, erzeugt Lobster die Nachricht zunächst **o
 4. das jeweilige **Modul-Element** unter `extension` (z. B. `nutritionalInformationModule` → `urn:gs1:gdsn:nutritional_information:xsd:3`); die Elemente **innerhalb** eines Moduls sind wieder ohne Namespace
 
 Die vollständige Liste mit üblichem Präfix steht in `namespaces.csv`. Diese Namespaces müssen in Lobster bei der Ausgabe gesetzt werden.
+
+Als Referenz setzt `python3 tools/add_gdsn_namespaces.py <flat.xml> <gdsn.xml>` genau diese Namespaces in einer Nachricht ohne Namespaces. Damit lässt sich eine Lobster-Ausgabe prüfen oder umwandeln.
+
+## Beispielnachricht
+
+`examples/` enthält eine vollständige Beispiel-CIN (fiktive Daten, Präfix 4012345):
+
+| Datei | Inhalt |
+|---|---|
+| `examples/CIN_Beispiel_flat.xml` | wie Lobster sie gegen die flache XSD erzeugt (ohne Namespaces) |
+| `examples/CIN_Beispiel_gdsn.xml` | dieselbe Nachricht GDSN-konform mit Namespaces (erzeugt mit `tools/add_gdsn_namespaces.py`) |
+
+Inhalt: Karton `CASE` (GTIN 14012345000013) mit 6 × Bio-Apfelsaft 1 l `BASE_UNIT_OR_EACH` (GTIN 04012345000016), Zielmarkt Deutschland (276), Texte auf Deutsch. Die Verbrauchereinheit hängt über `catalogueItemChildItemLink` unter dem Karton.
+
+| Ebene | Module |
+|---|---|
+| Karton | deliveryPurchasingInformation, packagingInformation, tradeItemDescription, tradeItemHierarchy, tradeItemMeasurements |
+| Flasche | allergenInformation, foodAndBeverageIngredient, nutritionalInformation, packagingInformation, packagingMarking, placeOfItemActivity, tradeItemDescription, tradeItemLifespan, tradeItemMeasurements |
+
+Die Codewerte (z. B. GPC-Brick, Verpackungs- und Nährstoffcodes) sind nach bestem Wissen gewählt, werden vom Schema aber nicht geprüft (offene Codelisten). Vor produktiver Nutzung gegen die aktuellen GS1-Codelisten und die Validierungsregeln des Datenpools prüfen.
 
 ## Weitere Hinweise
 

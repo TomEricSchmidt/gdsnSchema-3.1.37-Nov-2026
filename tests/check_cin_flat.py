@@ -8,6 +8,9 @@
    Module und ohne Namespaces (so wie Lobster sie erzeugt) gegen die flache XSD; und nach
    Setzen der Namespaces aus namespaces.csv wieder gegen das Original-Schema.
 5. Ein Modul, das nicht in der Liste steht, wird von der flachen XSD abgelehnt.
+6. Die Beispielnachricht Lobster/examples/CIN_Beispiel_flat.xml ist gegen die flache XSD gültig,
+   mit Namespaces (tools/add_gdsn_namespaces.py) gegen das Original-Schema, und
+   CIN_Beispiel_gdsn.xml ist aktuell.
 
 Aufruf (aus dem Repo-Root): python3 tests/check_cin_flat.py
 """
@@ -21,6 +24,7 @@ from lxml import etree
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
+from add_gdsn_namespaces import add_namespaces  # noqa: E402
 from build_cin_flat_xsd import read_module_list  # noqa: E402
 
 SAMPLE = os.path.join(ROOT, "Instance File", "CatalogueItemNotification.xml")
@@ -28,6 +32,8 @@ ORIG = os.path.join(ROOT, "Schemas", "gs1", "gdsn", "CatalogueItemNotification.x
 LOBSTER = os.path.join(ROOT, "Lobster")
 MODULE_LIST = os.path.join(LOBSTER, "modules.txt")
 FLAT = os.path.join(LOBSTER, "CatalogueItemNotification_flat.xsd")
+EXAMPLE = os.path.join(LOBSTER, "examples", "CIN_Beispiel_flat.xml")
+EXAMPLE_GDSN = os.path.join(LOBSTER, "examples", "CIN_Beispiel_gdsn.xml")
 NS_FILE = os.path.join(LOBSTER, "namespaces.csv")
 BUILD = os.path.join(ROOT, "tools", "build_cin_flat_xsd.py")
 XS = "{http://www.w3.org/2001/XMLSchema}"
@@ -78,19 +84,7 @@ if not schema.validate(doc):
 print("Beispiel ohne Namespaces gegen flache XSD: gültig%s"
       % (" (nicht gelistete Module entfernt: %s)" % ", ".join(sorted({m.tag for m in removed})) if removed else ""))
 
-with open(NS_FILE, encoding="utf-8") as f:
-    ns_of = {line.split(";")[0]: line.strip().split(";")[3] for line in list(f)[1:]}
-gdsn = copy.deepcopy(doc)
-root = gdsn.getroot()
-root.tag = "{%s}%s" % (ns_of[root.tag], root.tag)
-for el in root.iter("StandardBusinessDocumentHeader"):
-    for d in el.iter():
-        d.tag = "{%s}%s" % (ns_of["StandardBusinessDocumentHeader"], d.tag)
-for el in root.iter("catalogueItemNotification"):
-    el.tag = "{%s}%s" % (ns_of[el.tag], el.tag)
-for ext in root.iter("extension"):
-    for m in ext:
-        m.tag = "{%s}%s" % (ns_of[m.tag], m.tag)
+gdsn = add_namespaces(copy.deepcopy(doc))
 orig_schema.assertValid(gdsn)
 print("Nach Setzen der Namespaces aus namespaces.csv gegen Original-Schema: gültig")
 
@@ -100,3 +94,14 @@ if removed:
     if schema.validate(doc):
         fail("Modul %s steht nicht in der Liste, wurde aber akzeptiert" % removed[0].tag)
     print("Nicht gelistetes Modul %s wird abgelehnt" % removed[0].tag)
+
+# 6. Beispielnachricht Lobster/examples
+example = etree.parse(EXAMPLE)
+if not schema.validate(example):
+    fail("CIN_Beispiel_flat.xml ungültig gegen flache XSD:\n" + "\n".join(str(e) for e in schema.error_log))
+example_gdsn = add_namespaces(example)
+orig_schema.assertValid(example_gdsn)
+if etree.tostring(example_gdsn, method="c14n") != etree.tostring(etree.parse(EXAMPLE_GDSN), method="c14n"):
+    fail("CIN_Beispiel_gdsn.xml ist nicht aktuell: python3 tools/add_gdsn_namespaces.py "
+         "Lobster/examples/CIN_Beispiel_flat.xml Lobster/examples/CIN_Beispiel_gdsn.xml")
+print("Lobster/examples/CIN_Beispiel_flat.xml: gültig (flach und mit Namespaces gegen Original), GDSN-Fassung aktuell")

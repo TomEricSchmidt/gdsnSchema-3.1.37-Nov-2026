@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Beispiel-CIN gegen Lobster/CatalogueItemNotification_flat.xsd (ohne Namespaces, so wie Lobster sie erzeugt).
+  Hierarchie: Karton (CASE, GTIN 14012345000013) mit 6 x Bio-Apfelsaft 1 l (BASE_UNIT_OR_EACH, GTIN 04012345000016).
+  Alle GTINs/GLNs, Firmen- und Markennamen sind fiktiv (Präfix 4012345, Prüfziffern gültig).
+  GDSN-konforme Fassung mit Namespaces: CIN_Beispiel_gdsn.xml (erzeugt mit tools/add_gdsn_namespaces.py).
+-->
+<catalogueItemNotificationMessage>
+    <StandardBusinessDocumentHeader>
+        <HeaderVersion>1.0</HeaderVersion>
+        <Sender>
+            <Identifier Authority="GS1">4012345000009</Identifier>
+        </Sender>
+        <Receiver>
+            <Identifier Authority="GS1">4000000000013</Identifier>
+        </Receiver>
+        <DocumentIdentification>
+            <Standard>GS1</Standard>
+            <TypeVersion>3.1</TypeVersion>
+            <InstanceIdentifier>CIN-20261002-0001</InstanceIdentifier>
+            <Type>catalogueItemNotification</Type>
+            <CreationDateAndTime>2026-10-02T09:00:00+02:00</CreationDateAndTime>
+        </DocumentIdentification>
+    </StandardBusinessDocumentHeader>
+    <transaction>
+        <transactionIdentification>
+            <entityIdentification>TRX-20261002-0001</entityIdentification>
+            <contentOwner>
+                <gln>4012345000009</gln>
+            </contentOwner>
+        </transactionIdentification>
+        <documentCommand>
+            <documentCommandHeader type="ADD">
+                <documentCommandIdentification>
+                    <entityIdentification>CMD-20261002-0001</entityIdentification>
+                    <contentOwner>
+                        <gln>4012345000009</gln>
+                    </contentOwner>
+                </documentCommandIdentification>
+            </documentCommandHeader>
+            <catalogueItemNotification>
+                <creationDateTime>2026-10-02T09:00:00+02:00</creationDateTime>
+                <documentStatusCode>ORIGINAL</documentStatusCode>
+                <catalogueItemNotificationIdentification>
+                    <entityIdentification>CIN-20261002-0001</entityIdentification>
+                    <contentOwner>
+                        <gln>4012345000009</gln>
+                    </contentOwner>
+                </catalogueItemNotificationIdentification>
+                <isReload>false</isReload>
+                <catalogueItem>
+                    <dataRecipient>4012345999990</dataRecipient>
+                    <sourceDataPool>4000000000013</sourceDataPool>
+                    <catalogueItemState>
+                        <catalogueItemStateCode>REGISTERED</catalogueItemStateCode>
+                    </catalogueItemState>
+                    <!-- Ebene 1: Karton mit 6 Flaschen -->
+                    <tradeItem>
+                        <gtin>14012345000013</gtin>
+                        <isTradeItemABaseUnit>false</isTradeItemABaseUnit>
+                        <isTradeItemAConsumerUnit>false</isTradeItemAConsumerUnit>
+                        <isTradeItemADespatchUnit>true</isTradeItemADespatchUnit>
+                        <isTradeItemAnInvoiceUnit>true</isTradeItemAnInvoiceUnit>
+                        <isTradeItemAnOrderableUnit>true</isTradeItemAnOrderableUnit>
+                        <tradeItemUnitDescriptorCode>CASE</tradeItemUnitDescriptorCode>
+                        <brandOwner>
+                            <gln>4012345000009</gln>
+                            <partyName>Musterhof Fruchtsäfte GmbH</partyName>
+                        </brandOwner>
+                        <informationProviderOfTradeItem>
+                            <gln>4012345000009</gln>
+                            <partyName>Musterhof Fruchtsäfte GmbH</partyName>
+                        </informationProviderOfTradeItem>
+                        <gdsnTradeItemClassification>
+                            <gpcCategoryCode>10000222</gpcCategoryCode>
+                        </gdsnTradeItemClassification>
+                        <nextLowerLevelTradeItemInformation>
+                            <quantityOfChildren>1</quantityOfChildren>
+                            <totalQuantityOfNextLowerLevelTradeItem>6</totalQuantityOfNextLowerLevelTradeItem>
+                            <childTradeItem>
+                                <gtin>04012345000016</gtin>
+                                <quantityOfNextLowerLevelTradeItem>6</quantityOfNextLowerLevelTradeItem>
+                            </childTradeItem>
+                        </nextLowerLevelTradeItemInformation>
+                        <targetMarket>
+                            <targetMarketCountryCode>276</targetMarketCountryCode>
+                        </targetMarket>
+                        <tradeItemInformation>
+                            <extension>
+                                <deliveryPurchasingInformationModule>
+                                    <deliveryPurchasingInformation>
+                                        <isTradeItemReorderable>true</isTradeItemReorderable>
+                                        <orderQuantityMinimum>1</orderQuantityMinimum>
+                                        <orderQuantityMultiple>1</orderQuantityMultiple>
+                                        <startAvailabilityDateTime>2026-11-01T00:00:00+01:00</startAvailabilityDateTime>
+                                    </deliveryPurchasingInformation>
+                                </deliveryPurchasingInformationModule>
+                                <packagingInformationModule>
+                                    <packaging>
+                                        <packagingTypeCode>CT</packagingTypeCode>
+                                    </packaging>
+                                </packagingInformationModule>
+                                <tradeItemDescriptionModule>
+                                    <tradeItemDescriptionInformation>
+                                        <descriptionShort languageCode="de">Musterhof Bio Apfelsaft 6x1l</descriptionShort>
+                                        <functionalName languageCode="de">Apfelsaft</functionalName>
+                                        <tradeItemDescription languageCode="de">Musterhof Bio Apfelsaft naturtrüb, Karton mit 6 x 1 l Glasflasche</tradeItemDescription>
+                                        <brandNameInformation>
+                                            <brandName>Musterhof</brandName>
+                                        </brandNameInformation>
+                                    </tradeItemDescriptionInformation>
+                                </tradeItemDescriptionModule>
+                                <tradeItemHierarchyModule>
+                                    <tradeItemHierarchy>
+                                        <quantityOfCompleteLayersContainedInATradeItem>1</quantityOfCompleteLayersContainedInATradeItem>
+                                        <quantityOfLayersPerPallet>5</quantityOfLayersPerPallet>
+                                        <quantityOfTradeItemsContainedInACompleteLayer>6</quantityOfTradeItemsContainedInACompleteLayer>
+                                        <quantityOfTradeItemsPerPallet>100</quantityOfTradeItemsPerPallet>
+                                        <quantityOfTradeItemsPerPalletLayer>20</quantityOfTradeItemsPerPalletLayer>
+                                    </tradeItemHierarchy>
+                                </tradeItemHierarchyModule>
+                                <tradeItemMeasurementsModule>
+                                    <tradeItemMeasurements>
+                                        <depth measurementUnitCode="MMT">200</depth>
+                                        <height measurementUnitCode="MMT">310</height>
+                                        <netContent measurementUnitCode="LTR">6</netContent>
+                                        <width measurementUnitCode="MMT">290</width>
+                                        <tradeItemWeight>
+                                            <grossWeight measurementUnitCode="KGM">9.2</grossWeight>
+                                            <netWeight measurementUnitCode="KGM">6.2</netWeight>
+                                        </tradeItemWeight>
+                                    </tradeItemMeasurements>
+                                </tradeItemMeasurementsModule>
+                            </extension>
+                        </tradeItemInformation>
+                        <tradeItemSynchronisationDates>
+                            <lastChangeDateTime>2026-10-02T09:00:00+02:00</lastChangeDateTime>
+                            <effectiveDateTime>2026-10-02T09:00:00+02:00</effectiveDateTime>
+                            <publicationDateTime>2026-10-02T09:00:00+02:00</publicationDateTime>
+                        </tradeItemSynchronisationDates>
+                    </tradeItem>
+                    <!-- Ebene 2: Flasche 1 l (Verbrauchereinheit) -->
+                    <catalogueItemChildItemLink>
+                        <quantity>6</quantity>
+                        <catalogueItem>
+                            <dataRecipient>4012345999990</dataRecipient>
+                            <sourceDataPool>4000000000013</sourceDataPool>
+                            <catalogueItemState>
+                                <catalogueItemStateCode>REGISTERED</catalogueItemStateCode>
+                            </catalogueItemState>
+                            <tradeItem>
+                                <gtin>04012345000016</gtin>
+                                <isTradeItemABaseUnit>true</isTradeItemABaseUnit>
+                                <isTradeItemAConsumerUnit>true</isTradeItemAConsumerUnit>
+                                <isTradeItemADespatchUnit>false</isTradeItemADespatchUnit>
+                                <isTradeItemAnInvoiceUnit>false</isTradeItemAnInvoiceUnit>
+                                <isTradeItemAnOrderableUnit>false</isTradeItemAnOrderableUnit>
+                                <tradeItemUnitDescriptorCode>BASE_UNIT_OR_EACH</tradeItemUnitDescriptorCode>
+                                <brandOwner>
+                                    <gln>4012345000009</gln>
+                                    <partyName>Musterhof Fruchtsäfte GmbH</partyName>
+                                </brandOwner>
+                                <informationProviderOfTradeItem>
+                                    <gln>4012345000009</gln>
+                                    <partyName>Musterhof Fruchtsäfte GmbH</partyName>
+                                </informationProviderOfTradeItem>
+                                <manufacturerOfTradeItem>
+                                    <gln>4012345000009</gln>
+                                    <partyName>Musterhof Fruchtsäfte GmbH</partyName>
+                                </manufacturerOfTradeItem>
+                                <gdsnTradeItemClassification>
+                                    <gpcCategoryCode>10000222</gpcCategoryCode>
+                                </gdsnTradeItemClassification>
+                                <targetMarket>
+                                    <targetMarketCountryCode>276</targetMarketCountryCode>
+                                </targetMarket>
+                                <tradeItemContactInformation>
+                                    <contactTypeCode>CXC</contactTypeCode>
+                                    <contactAddress>Musterstraße 1, 12345 Musterstadt</contactAddress>
+                                    <contactName>Verbraucherservice Musterhof</contactName>
+                                    <isContactInformationMarkedOnPackage>true</isContactInformationMarkedOnPackage>
+                                </tradeItemContactInformation>
+                                <tradeItemInformation>
+                                    <extension>
+                                        <allergenInformationModule>
+                                            <allergenRelatedInformation>
+                                                <allergenSpecificationAgency>EU</allergenSpecificationAgency>
+                                                <allergenSpecificationName>LMIV 1169/2011</allergenSpecificationName>
+                                                <allergenStatement languageCode="de">Enthält keine kennzeichnungspflichtigen Allergene.</allergenStatement>
+                                                <isAllergenRelevantDataProvided>true</isAllergenRelevantDataProvided>
+                                                <allergen>
+                                                    <allergenTypeCode>AU</allergenTypeCode>
+                                                    <levelOfContainmentCode>FREE_FROM</levelOfContainmentCode>
+                                                </allergen>
+                                            </allergenRelatedInformation>
+                                        </allergenInformationModule>
+                                        <foodAndBeverageIngredientModule>
+                                            <ingredientStatement languageCode="de">Apfelsaft* (*aus kontrolliert ökologischem Anbau)</ingredientStatement>
+                                            <juiceContentPercent>100</juiceContentPercent>
+                                            <foodAndBeverageIngredient>
+                                                <ingredientSequence>1</ingredientSequence>
+                                                <ingredientContentPercentage>100</ingredientContentPercentage>
+                                                <ingredientName languageCode="de">Apfelsaft</ingredientName>
+                                            </foodAndBeverageIngredient>
+                                        </foodAndBeverageIngredientModule>
+                                        <nutritionalInformationModule>
+                                            <nutrientHeader>
+                                                <preparationStateCode>UNPREPARED</preparationStateCode>
+                                                <nutrientBasisQuantity measurementUnitCode="MLT">100</nutrientBasisQuantity>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>ENER-</nutrientTypeCode>
+                                                    <measurementPrecisionCode>APPROXIMATELY</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="KJO">195</quantityContained>
+                                                    <quantityContained measurementUnitCode="E14">46</quantityContained>
+                                                </nutrientDetail>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>FAT</nutrientTypeCode>
+                                                    <measurementPrecisionCode>LESS_THAN</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="GRM">0.5</quantityContained>
+                                                </nutrientDetail>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>FASAT</nutrientTypeCode>
+                                                    <measurementPrecisionCode>LESS_THAN</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="GRM">0.1</quantityContained>
+                                                </nutrientDetail>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>CHOAVL</nutrientTypeCode>
+                                                    <measurementPrecisionCode>APPROXIMATELY</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="GRM">10.5</quantityContained>
+                                                </nutrientDetail>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>SUGAR-</nutrientTypeCode>
+                                                    <measurementPrecisionCode>APPROXIMATELY</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="GRM">10.1</quantityContained>
+                                                </nutrientDetail>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>PRO-</nutrientTypeCode>
+                                                    <measurementPrecisionCode>LESS_THAN</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="GRM">0.5</quantityContained>
+                                                </nutrientDetail>
+                                                <nutrientDetail>
+                                                    <nutrientTypeCode>SALTEQ</nutrientTypeCode>
+                                                    <measurementPrecisionCode>LESS_THAN</measurementPrecisionCode>
+                                                    <quantityContained measurementUnitCode="GRM">0.01</quantityContained>
+                                                </nutrientDetail>
+                                            </nutrientHeader>
+                                        </nutritionalInformationModule>
+                                        <packagingInformationModule>
+                                            <packaging>
+                                                <packagingTypeCode>BO</packagingTypeCode>
+                                                <packagingMaterial>
+                                                    <packagingMaterialTypeCode>GLASS</packagingMaterialTypeCode>
+                                                </packagingMaterial>
+                                            </packaging>
+                                        </packagingInformationModule>
+                                        <packagingMarkingModule>
+                                            <packagingMarking>
+                                                <hasBatchNumber>true</hasBatchNumber>
+                                                <isNetContentDeclarationIndicated>true</isNetContentDeclarationIndicated>
+                                                <isPriceOnPack>false</isPriceOnPack>
+                                                <packagingMarkedLabelAccreditationCode>EU_ORGANIC_FARMING</packagingMarkedLabelAccreditationCode>
+                                                <packagingMarkedLanguageCode>de</packagingMarkedLanguageCode>
+                                            </packagingMarking>
+                                        </packagingMarkingModule>
+                                        <placeOfItemActivityModule>
+                                            <placeOfProductActivity>
+                                                <countryOfOrigin>
+                                                    <countryCode>276</countryCode>
+                                                </countryOfOrigin>
+                                            </placeOfProductActivity>
+                                        </placeOfItemActivityModule>
+                                        <tradeItemDescriptionModule>
+                                            <tradeItemDescriptionInformation>
+                                                <descriptionShort languageCode="de">Musterhof Bio Apfelsaft 1l</descriptionShort>
+                                                <functionalName languageCode="de">Apfelsaft</functionalName>
+                                                <regulatedProductName languageCode="de">Apfelsaft</regulatedProductName>
+                                                <tradeItemDescription languageCode="de">Musterhof Bio Apfelsaft naturtrüb 1 l Glasflasche</tradeItemDescription>
+                                                <variantDescription languageCode="de">naturtrüb</variantDescription>
+                                                <brandNameInformation>
+                                                    <brandName>Musterhof</brandName>
+                                                </brandNameInformation>
+                                            </tradeItemDescriptionInformation>
+                                        </tradeItemDescriptionModule>
+                                        <tradeItemLifespanModule>
+                                            <tradeItemLifespan>
+                                                <minimumTradeItemLifespanFromTimeOfArrival>180</minimumTradeItemLifespanFromTimeOfArrival>
+                                                <minimumTradeItemLifespanFromTimeOfProduction>365</minimumTradeItemLifespanFromTimeOfProduction>
+                                            </tradeItemLifespan>
+                                        </tradeItemLifespanModule>
+                                        <tradeItemMeasurementsModule>
+                                            <tradeItemMeasurements>
+                                                <depth measurementUnitCode="MMT">90</depth>
+                                                <height measurementUnitCode="MMT">300</height>
+                                                <netContent measurementUnitCode="LTR">1</netContent>
+                                                <width measurementUnitCode="MMT">90</width>
+                                                <tradeItemWeight>
+                                                    <grossWeight measurementUnitCode="GRM">1450</grossWeight>
+                                                    <netWeight measurementUnitCode="GRM">1040</netWeight>
+                                                </tradeItemWeight>
+                                            </tradeItemMeasurements>
+                                        </tradeItemMeasurementsModule>
+                                    </extension>
+                                </tradeItemInformation>
+                                <tradeItemSynchronisationDates>
+                                    <lastChangeDateTime>2026-10-02T09:00:00+02:00</lastChangeDateTime>
+                                    <effectiveDateTime>2026-10-02T09:00:00+02:00</effectiveDateTime>
+                                    <publicationDateTime>2026-10-02T09:00:00+02:00</publicationDateTime>
+                                </tradeItemSynchronisationDates>
+                            </tradeItem>
+                        </catalogueItem>
+                    </catalogueItemChildItemLink>
+                </catalogueItem>
+            </catalogueItemNotification>
+        </documentCommand>
+    </transaction>
+</catalogueItemNotificationMessage>
