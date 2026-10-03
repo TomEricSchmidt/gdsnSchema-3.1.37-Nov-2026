@@ -3,8 +3,8 @@
 # Ein Modul-Element pro Zeile (Name wie im GDSN-Schema, z. B. allergenInformationModule).
 # Leerzeilen und Kommentare (#) werden ignoriert. Reihenfolge egal, die XSD sortiert alphabetisch.
 # Nach Änderungen neu erzeugen und prüfen:
-#   python3 tools/build_cin_flat_xsd.py --profile Lobster/storck/modules.txt
-#   python3 tests/check_profiles.py
+#   python3 tools/build_cin_flat_xsd.py
+#   python3 tests/check_cin_flat.py
 
 allergenInformationModule
 consumerInstructionsModule
