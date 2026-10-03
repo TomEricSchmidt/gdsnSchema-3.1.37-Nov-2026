@@ -14,10 +14,12 @@ Ergebnis: Bericht unter reports/release_check_<alt>_to_<neu>.md mit
   (Codelisten-Werte, Kind-Elemente, Kardinalitäten, Datentypen),
 - der Entscheidung, ob die flache CIN-XSD (Lobster/) neu erzeugt werden muss.
   Maßgeblich sind nur Komponenten, die von der CatalogueItemNotification inkl.
-  SBDH und aller TradeItem-Module erreichbar sind.
+  SBDH und den Modulen aus Lobster/modules.txt (Storck) erreichbar sind.
+  Module der Liste, die es im neuen Release nicht mehr gibt, werden als FEHLER
+  gemeldet, neue GS1-Module als Hinweis (Kandidaten für die Liste).
 
 Mit --apply werden Schemas/, Instance File/, HTML Sample/, TableOfContents.txt und
-docs/ durch das neue Release ersetzt. Ist die CIN betroffen, wird
+docs/ durch das neue Release ersetzt. Ist die CIN betroffen, werden
 tools/build_cin_flat_xsd.py und tests/check_cin_flat.py ausgeführt.
 """
 import copy
@@ -189,8 +191,20 @@ def details(old, new):
 # ---------------------------------------------------------------- CIN-Relevanz
 
 
-def cin_reachable(files, comps):
-    """Alle Komponenten, die die flache CIN-XSD enthält (CIN + SBDH + alle Module)."""
+def module_elements(comps, rel):
+    """Namen der globalen Elemente einer Modul-Datei."""
+    return [k[2] for k, (r, el) in comps.items() if r == rel and k[0] == "element"]
+
+
+def load_module_list():
+    """Module der flachen CIN-XSD aus Lobster/modules.txt"""
+    sys.path.insert(0, os.path.join(ROOT_DIR, "tools"))
+    from build_cin_flat_xsd import read_module_list
+    return read_module_list(os.path.join(ROOT_DIR, "Lobster", "modules.txt"))
+
+
+def cin_reachable(files, comps, modules=None):
+    """Alle Komponenten, die die flache CIN-XSD enthält (CIN + SBDH + alle bzw. die angegebenen Module)."""
     heads = {}
     for (space, ns, name), (rel, el) in comps.items():
         if space == "element" and el.get("substitutionGroup"):
@@ -198,7 +212,8 @@ def cin_reachable(files, comps):
             if hns == ns:  # z. B. SBDH ScopeInformation; gdsn_common:document -> nur die CIN selbst
                 heads.setdefault(("element", hns, hname), []).append(("element", ns, name))
     todo = [("element", CIN_NS, n) for n in CIN_ROOTS]
-    todo += [k for k, (rel, el) in comps.items() if k[0] == "element" and rel.endswith("Module.xsd")]
+    todo += [k for k, (rel, el) in comps.items() if k[0] == "element" and rel.endswith("Module.xsd")
+             and (modules is None or k[2] in modules)]
     seen = set()
     while todo:
         key = todo.pop()
@@ -228,21 +243,23 @@ def cin_reachable(files, comps):
 def compare(old_dir, new_dir):
     old_files, old_comps = load(old_dir)
     new_files, new_comps = load(new_dir)
-    reach = cin_reachable(old_files, old_comps) | cin_reachable(new_files, new_comps)
+    modules = load_module_list()
+    reach = cin_reachable(old_files, old_comps, modules) | cin_reachable(new_files, new_comps, modules)
+    new_modules = sorted(name for (sp, ns, name), (rel, el) in new_comps.items()
+                         if sp == "element" and rel.endswith("Module.xsd"))
     old_v = old_files[CIN_FILE].get("version") if CIN_FILE in old_files else "?"
     new_v = new_files[CIN_FILE].get("version") if CIN_FILE in new_files else "?"
 
     lines = ["# GDSN-Release-Prüfung %s → %s" % (old_v, new_v), ""]
-    cin_reasons, doc_only_cin = [], []
+    cin_reasons, doc_only_cin, hints = [], [], []
+    errors = ["Modul `%s` aus Lobster/modules.txt gibt es im neuen Release nicht mehr – Liste anpassen" % m
+              for m in modules if m not in new_modules]
 
     added_files = sorted(set(new_files) - set(old_files))
     removed_files = sorted(set(old_files) - set(new_files))
     for f in added_files:
         if f.endswith("Module.xsd"):
-            cin_reasons.append("neues Modul `%s`" % f)
-    for f in removed_files:
-        if f.endswith("Module.xsd"):
-            cin_reasons.append("Modul entfernt `%s`" % f)
+            hints += ["neues GS1-Modul `%s` (nicht in Lobster/modules.txt)" % m for m in module_elements(new_comps, f)]
 
     per_file = {}
     for key in sorted(set(old_comps) | set(new_comps), key=lambda k: (k[0], k[2])):
@@ -261,7 +278,7 @@ def compare(old_dir, new_dir):
             continue
         per_file.setdefault(rel, []).append((key, entry))
         if rel in added_files or rel in removed_files:
-            continue  # als neue/entfernte Datei bereits begründet
+            continue  # als neue/entfernte Datei bereits gemeldet
         if cin and entry[0] == "nur Dokumentation":
             doc_only_cin.append(key[2])
         elif cin:
@@ -273,15 +290,21 @@ def compare(old_dir, new_dir):
     version_only = [f for f in unchanged if old_files[f].get("version") != new_files[f].get("version")]
 
     # Entscheidung
-    if cin_reasons:
+    if errors:
+        verdict = "**FEHLER – Lobster/modules.txt anpassen**, danach neu erzeugen"
+    elif cin_reasons:
         verdict = "**JA – neue flache CIN-XSD erzeugen** (%d inhaltliche Änderung(en) im CIN-Umfang)" % len(cin_reasons)
     elif doc_only_cin:
         verdict = "**OPTIONAL** – im CIN-Umfang nur Dokumentationsänderungen (%d); die Struktur bleibt gleich" % len(doc_only_cin)
     else:
         verdict = "**NEIN** – keine Änderungen im CIN-Umfang"
-    lines += ["## Ergebnis", "", "Neue flache CIN-XSD erforderlich: " + verdict, ""]
-    if cin_reasons:
-        lines += ["Gründe:", ""] + ["- " + r for r in cin_reasons] + [""]
+    lines += ["## Ergebnis", "",
+              "CIN-Umfang: CIN, SBDH und die %d Module aus `Lobster/modules.txt`." % len(modules), "",
+              "Neue flache CIN-XSD erforderlich: " + verdict, ""]
+    if errors or cin_reasons:
+        lines += ["Gründe:", ""] + ["- " + r for r in errors + cin_reasons] + [""]
+    if hints:
+        lines += ["Hinweise:", ""] + ["- " + h for h in hints] + [""]
 
     lines += ["## Übersicht", "",
               "| | Anzahl |", "|---|---|",
@@ -296,7 +319,7 @@ def compare(old_dir, new_dir):
         lines += ["### Entfernte Dateien", ""] + ["- `%s`" % f for f in removed_files] + [""]
 
     lines += ["## Änderungen je Datei", "",
-              "Spalte *CIN*: ✔ = Teil der flachen CIN-XSD (CIN, SBDH, alle Module).", ""]
+              "Spalte *CIN*: ✔ = Teil der flachen CIN-XSD (CIN, SBDH, Module aus Lobster/modules.txt).", ""]
     for rel in sorted(per_file):
         ov = old_files.get(rel, etree.Element("x")).get("version")
         nv = new_files.get(rel, etree.Element("x")).get("version")
@@ -314,7 +337,7 @@ def compare(old_dir, new_dir):
         lines.append("")
     if not per_file and not added_files and not removed_files:
         lines += ["Keine inhaltlichen Unterschiede in den XSD-Dateien.", ""]
-    return "\n".join(lines), bool(cin_reasons), old_v, new_v
+    return "\n".join(lines), bool(errors or cin_reasons), old_v, new_v
 
 
 # ---------------------------------------------------------------- Übernahme
@@ -361,7 +384,8 @@ def main():
             if cin_affected:
                 for script in ("tools/build_cin_flat_xsd.py", "tests/check_cin_flat.py"):
                     if subprocess.run([sys.executable, os.path.join(ROOT_DIR, script)]).returncode:
-                        sys.exit("\nFEHLER in %s – Release ist übernommen, die flache CIN-XSD muss geprüft werden." % script)
+                        sys.exit("\nFEHLER in %s – Release ist übernommen, die flache CIN-XSD muss geprüft werden "
+                                 "(bei fehlenden Modulen Lobster/modules.txt anpassen)." % script)
             else:
                 print("CIN nicht betroffen – flache CIN-XSD bleibt unverändert.")
 
