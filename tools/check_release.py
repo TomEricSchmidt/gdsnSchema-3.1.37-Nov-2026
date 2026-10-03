@@ -15,10 +15,15 @@ Ergebnis: Bericht unter reports/release_check_<alt>_to_<neu>.md mit
 - der Entscheidung, ob die flache CIN-XSD (Lobster/) neu erzeugt werden muss.
   Maßgeblich sind nur Komponenten, die von der CatalogueItemNotification inkl.
   SBDH und aller TradeItem-Module erreichbar sind.
+- derselben Entscheidung für jedes Modul-Profil (Lobster/<profil>/modules.txt,
+  z. B. Storck), bezogen nur auf die dort gelisteten Module. Entfernte oder
+  umbenannte Module der Liste werden als Fehler gemeldet, neue GS1-Module als
+  Hinweis (Kandidaten für die Liste).
 
 Mit --apply werden Schemas/, Instance File/, HTML Sample/, TableOfContents.txt und
 docs/ durch das neue Release ersetzt. Ist die CIN betroffen, wird
-tools/build_cin_flat_xsd.py und tests/check_cin_flat.py ausgeführt.
+tools/build_cin_flat_xsd.py und tests/check_cin_flat.py ausgeführt; für jedes
+betroffene Profil build_cin_flat_xsd.py --profile und tests/check_profiles.py.
 """
 import copy
 import glob
@@ -189,8 +194,21 @@ def details(old, new):
 # ---------------------------------------------------------------- CIN-Relevanz
 
 
-def cin_reachable(files, comps):
-    """Alle Komponenten, die die flache CIN-XSD enthält (CIN + SBDH + alle Module)."""
+def module_elements(comps, rel):
+    """Namen der globalen Elemente einer Modul-Datei."""
+    return [k[2] for k, (r, el) in comps.items() if r == rel and k[0] == "element"]
+
+
+def load_profiles():
+    """{profilname: [modul-elemente]} aus Lobster/<profil>/modules.txt"""
+    sys.path.insert(0, os.path.join(ROOT_DIR, "tools"))
+    from build_cin_flat_xsd import read_module_list
+    return {os.path.basename(os.path.dirname(p)): read_module_list(p)
+            for p in sorted(glob.glob(os.path.join(ROOT_DIR, "Lobster", "*", "modules.txt")))}
+
+
+def cin_reachable(files, comps, modules=None):
+    """Alle Komponenten, die die flache CIN-XSD enthält (CIN + SBDH + alle bzw. die angegebenen Module)."""
     heads = {}
     for (space, ns, name), (rel, el) in comps.items():
         if space == "element" and el.get("substitutionGroup"):
@@ -198,7 +216,8 @@ def cin_reachable(files, comps):
             if hns == ns:  # z. B. SBDH ScopeInformation; gdsn_common:document -> nur die CIN selbst
                 heads.setdefault(("element", hns, hname), []).append(("element", ns, name))
     todo = [("element", CIN_NS, n) for n in CIN_ROOTS]
-    todo += [k for k, (rel, el) in comps.items() if k[0] == "element" and rel.endswith("Module.xsd")]
+    todo += [k for k, (rel, el) in comps.items() if k[0] == "element" and rel.endswith("Module.xsd")
+             and (modules is None or k[2] in modules)]
     seen = set()
     while todo:
         key = todo.pop()
@@ -229,6 +248,14 @@ def compare(old_dir, new_dir):
     old_files, old_comps = load(old_dir)
     new_files, new_comps = load(new_dir)
     reach = cin_reachable(old_files, old_comps) | cin_reachable(new_files, new_comps)
+    profiles = load_profiles()
+    preach = {p: cin_reachable(old_files, old_comps, mods) | cin_reachable(new_files, new_comps, mods)
+              for p, mods in profiles.items()}
+    preasons = {p: [] for p in profiles}
+    pdocs = {p: [] for p in profiles}
+    perrors = {p: [] for p in profiles}
+    new_modules = sorted(name for (sp, ns, name), (rel, el) in new_comps.items()
+                         if sp == "element" and rel.endswith("Module.xsd"))
     old_v = old_files[CIN_FILE].get("version") if CIN_FILE in old_files else "?"
     new_v = new_files[CIN_FILE].get("version") if CIN_FILE in new_files else "?"
 
@@ -237,12 +264,19 @@ def compare(old_dir, new_dir):
 
     added_files = sorted(set(new_files) - set(old_files))
     removed_files = sorted(set(old_files) - set(new_files))
+    phints = {p: [] for p in profiles}
     for f in added_files:
         if f.endswith("Module.xsd"):
             cin_reasons.append("neues Modul `%s`" % f)
+            for p in profiles:
+                phints[p] += ["neues GS1-Modul `%s` (nicht in der Liste)" % m for m in module_elements(new_comps, f)]
     for f in removed_files:
         if f.endswith("Module.xsd"):
             cin_reasons.append("Modul entfernt `%s`" % f)
+    for p, mods in profiles.items():
+        for m in mods:
+            if m not in new_modules:
+                perrors[p].append("Modul `%s` aus der Liste gibt es im neuen Release nicht mehr – Liste anpassen" % m)
 
     per_file = {}
     for key in sorted(set(old_comps) | set(new_comps), key=lambda k: (k[0], k[2])):
@@ -259,9 +293,15 @@ def compare(old_dir, new_dir):
             entry = ("nur Dokumentation", [], cin)
         else:
             continue
-        per_file.setdefault(rel, []).append((key, entry))
+        in_profiles = [p for p in profiles if key in preach[p]]
+        per_file.setdefault(rel, []).append((key, entry + (in_profiles,)))
         if rel in added_files or rel in removed_files:
             continue  # als neue/entfernte Datei bereits begründet
+        for p in in_profiles:
+            if entry[0] == "nur Dokumentation":
+                pdocs[p].append(key[2])
+            else:
+                preasons[p].append("`%s` %s (%s)" % (key[2], entry[0], rel))
         if cin and entry[0] == "nur Dokumentation":
             doc_only_cin.append(key[2])
         elif cin:
@@ -282,6 +322,22 @@ def compare(old_dir, new_dir):
     lines += ["## Ergebnis", "", "Neue flache CIN-XSD erforderlich: " + verdict, ""]
     if cin_reasons:
         lines += ["Gründe:", ""] + ["- " + r for r in cin_reasons] + [""]
+    profile_affected = []
+    for p in profiles:
+        if perrors[p]:
+            pv = "**FEHLER – Modulliste anpassen**, danach neu erzeugen"
+        elif preasons[p]:
+            pv = "**JA – neu erzeugen** (%d inhaltliche Änderung(en) in den Modulen der Liste)" % len(preasons[p])
+        elif pdocs[p]:
+            pv = "**OPTIONAL** – nur Dokumentationsänderungen (%d)" % len(pdocs[p])
+        else:
+            pv = "**NEIN** – keine Änderungen in den Modulen der Liste"
+        if perrors[p] or preasons[p]:
+            profile_affected.append(p)
+        lines += ["### Profil `%s` (Lobster/%s/modules.txt, %d Module)" % (p, p, len(profiles[p])), "",
+                  "Neue flache XSD für dieses Profil erforderlich: " + pv, ""]
+        lines += ["- " + r for r in perrors[p] + preasons[p] + phints[p]]
+        lines += [""] if perrors[p] or preasons[p] or phints[p] else []
 
     lines += ["## Übersicht", "",
               "| | Anzahl |", "|---|---|",
@@ -296,7 +352,8 @@ def compare(old_dir, new_dir):
         lines += ["### Entfernte Dateien", ""] + ["- `%s`" % f for f in removed_files] + [""]
 
     lines += ["## Änderungen je Datei", "",
-              "Spalte *CIN*: ✔ = Teil der flachen CIN-XSD (CIN, SBDH, alle Module).", ""]
+              "Spalte *CIN*: ✔ = Teil der flachen CIN-XSD (CIN, SBDH, alle Module). "
+              "Spalte *Profile*: betroffene Modul-Profile.", ""]
     for rel in sorted(per_file):
         ov = old_files.get(rel, etree.Element("x")).get("version")
         nv = new_files.get(rel, etree.Element("x")).get("version")
@@ -307,14 +364,14 @@ def compare(old_dir, new_dir):
         else:
             title = " (Version %s → %s)" % (ov, nv) if ov != nv else ""
         lines += ["### `%s`%s" % (rel, title), "",
-                  "| Komponente | Art | Änderung | CIN | Details |", "|---|---|---|---|---|"]
-        for (space, ns, name), (what, det, cin) in per_file[rel]:
-            lines.append("| `%s` | %s | %s | %s | %s |" % (
-                name, space, what, "✔" if cin else "", "<br>".join(det)))
+                  "| Komponente | Art | Änderung | CIN | Profile | Details |", "|---|---|---|---|---|---|"]
+        for (space, ns, name), (what, det, cin, in_profiles) in per_file[rel]:
+            lines.append("| `%s` | %s | %s | %s | %s | %s |" % (
+                name, space, what, "✔" if cin else "", ", ".join(in_profiles), "<br>".join(det)))
         lines.append("")
     if not per_file and not added_files and not removed_files:
         lines += ["Keine inhaltlichen Unterschiede in den XSD-Dateien.", ""]
-    return "\n".join(lines), bool(cin_reasons), old_v, new_v
+    return "\n".join(lines), bool(cin_reasons), profile_affected, old_v, new_v
 
 
 # ---------------------------------------------------------------- Übernahme
@@ -347,7 +404,7 @@ def main():
         sys.exit(__doc__)
     with tempfile.TemporaryDirectory() as work:
         pkg, outer = extract_release(args[0], work)
-        report, cin_affected, old_v, new_v = compare(SCHEMA_DIR, find_schema_dir(pkg))
+        report, cin_affected, profile_affected, old_v, new_v = compare(SCHEMA_DIR, find_schema_dir(pkg))
         os.makedirs(os.path.join(ROOT_DIR, "reports"), exist_ok=True)
         out = os.path.join(ROOT_DIR, "reports", "release_check_%s_to_%s.md" % (old_v, new_v))
         with open(out, "w", encoding="utf-8") as f:
@@ -364,6 +421,14 @@ def main():
                         sys.exit("\nFEHLER in %s – Release ist übernommen, die flache CIN-XSD muss geprüft werden." % script)
             else:
                 print("CIN nicht betroffen – flache CIN-XSD bleibt unverändert.")
+            for p in profile_affected:
+                cmd = [os.path.join(ROOT_DIR, "tools", "build_cin_flat_xsd.py"), "--profile",
+                       os.path.join(ROOT_DIR, "Lobster", p, "modules.txt")]
+                if subprocess.run([sys.executable] + cmd).returncode:
+                    sys.exit("\nFEHLER beim Profil %s – Modulliste Lobster/%s/modules.txt anpassen (siehe Bericht)." % (p, p))
+            if profile_affected:
+                if subprocess.run([sys.executable, os.path.join(ROOT_DIR, "tests", "check_profiles.py")]).returncode:
+                    sys.exit("\nFEHLER in tests/check_profiles.py – Profil-XSDs prüfen.")
 
 
 if __name__ == "__main__":

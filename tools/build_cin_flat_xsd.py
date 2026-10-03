@@ -1,23 +1,33 @@
 #!/usr/bin/env python3
 """Baut aus den GS1-GDSN-Schemas eine einzige XSD für die CatalogueItemNotification (CIN).
 
-Ergebnis: Lobster/CatalogueItemNotification_flat.xsd
+Ergebnis: Lobster/CatalogueItemNotification_flat.xsd (alle Module)
+     bzw. bei --profile: <Profilordner>/CatalogueItemNotification_flat_<Profil>.xsd
 
 - Alle import/include (SBDH, SharedCommon, GdsnCommon, TradeItem, alle *Module.xsd)
   werden in eine Datei ohne targetNamespace aufgelöst.
 - Die Substitution Group gdsn_common:document wird durch das konkrete
   Element catalogueItemNotification ersetzt.
 - Das generische xsd:any in tradeItemInformation/extension und
-  componentInformation/extension wird durch alle TradeItem-Module ersetzt
-  (TradeItemModulesExtensionType, jedes Modul optional, alphabetisch).
+  componentInformation/extension wird durch die TradeItem-Module ersetzt
+  (TradeItemModulesExtensionType, jedes Modul optional, alphabetisch):
+  ohne Profil alle Module, mit Profil nur die in der Modulliste genannten.
 - Alle Element-Referenzen werden zu lokalen Elementen aufgelöst, sodass
   catalogueItemNotificationMessage das einzige globale Element ist.
 - Nicht erreichbare Typen werden entfernt.
 - Gleichnamige Typen aus unterschiedlichen Namespaces werden, falls sie sich
   unterscheiden, mit Präfix umbenannt; identische werden zusammengeführt.
 
-Aufruf (aus dem Repo-Root): python3 tools/build_cin_flat_xsd.py
+Aufruf (aus dem Repo-Root):
+    python3 tools/build_cin_flat_xsd.py                                    # alle Module
+    python3 tools/build_cin_flat_xsd.py --profile Lobster/storck/modules.txt  # nur gelistete Module
+
+Modulliste: ein Modul-Element pro Zeile (z. B. allergenInformationModule),
+Leerzeilen und Kommentare (#) werden ignoriert. Unbekannte oder doppelte
+Einträge brechen den Build mit Fehlermeldung ab.
 """
+import argparse
+import difflib
 import copy
 import glob
 import os
@@ -85,7 +95,42 @@ def schema_files():
     return files + modules, modules
 
 
+def read_module_list(path):
+    """Modulliste lesen: ein Element-Name pro Zeile, # leitet Kommentare ein."""
+    names = []
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            name = line.split("#", 1)[0].strip()
+            if name:
+                names.append(name)
+    return names
+
+
+def check_module_list(names, available, path):
+    """Abbruch bei unbekannten oder doppelten Modulen, mit Vorschlägen."""
+    errors = []
+    for name in sorted({n for n in names if names.count(n) > 1}):
+        errors.append("doppelt: %s" % name)
+    for name in names:
+        if name not in available:
+            hint = difflib.get_close_matches(name, available, n=1)
+            errors.append("unbekannt: %s%s" % (name, " (gemeint: %s?)" % hint[0] if hint else ""))
+    if errors:
+        sys.exit("Modulliste %s ist fehlerhaft:\n  " % path + "\n  ".join(errors))
+
+
 def main():
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("--profile", help="Modulliste (z. B. Lobster/storck/modules.txt)")
+    args = parser.parse_args()
+    if args.profile:
+        profile_dir = os.path.dirname(os.path.abspath(args.profile))
+        profile = os.path.basename(profile_dir)
+        out_file = os.path.join(profile_dir, "CatalogueItemNotification_flat_%s.xsd" % profile)
+        ns_file = os.path.join(profile_dir, "namespaces.csv")
+    else:
+        profile, out_file, ns_file = None, OUT_FILE, NS_FILE
+
     files, module_files = schema_files()
 
     # 1. Alle globalen Komponenten einsammeln: (space, ns, name) -> Element
@@ -106,6 +151,10 @@ def main():
                 module_elements.append((ns, c.get("name")))
     if len(module_elements) != len(module_files):
         sys.exit("Erwartet genau ein globales Element pro Modul")
+    if args.profile:
+        wanted = read_module_list(args.profile)
+        check_module_list(wanted, [name for ns, name in module_elements], args.profile)
+        module_elements = [(ns, name) for ns, name in module_elements if name in wanted]
 
     # 2. Neue (namespace-freie) Namen vergeben, Konflikte auflösen
     def canonical(el):
@@ -173,7 +222,8 @@ def main():
     # 5. Modul-Extension-Typ anlegen und in die Owner-Typen einhängen
     ext = etree.Element("{%s}complexType" % XS, name=MODULE_EXT_TYPE, nsmap=NS)
     ann = etree.SubElement(etree.SubElement(ext, "{%s}annotation" % XS), "{%s}documentation" % XS)
-    ann.text = "Ersetzt shared_common:ExtensionType (xsd:any). Enthält alle GDSN TradeItem-Module %s." % version
+    ann.text = "Ersetzt shared_common:ExtensionType (xsd:any). Enthält %s GDSN TradeItem-Module %s." % (
+        "die %d Module des Profils %s" % (len(module_elements), profile) if profile else "alle", version)
     seq = etree.SubElement(ext, "{%s}sequence" % XS)
     for ns, name in sorted(module_elements, key=lambda x: x[1].lower()):
         etree.SubElement(seq, "{%s}element" % XS, ref=newname[("element", ns, name)], minOccurs="0")
@@ -251,7 +301,9 @@ def main():
     )
     doc = etree.SubElement(etree.SubElement(schema, "{%s}annotation" % XS), "{%s}documentation" % XS)
     doc.text = (
-        "GS1 GDSN CatalogueItemNotification %s inkl. StandardBusinessDocumentHeader und aller TradeItem-Module, " % version
+        "GS1 GDSN CatalogueItemNotification %s inkl. StandardBusinessDocumentHeader und %s, " % (
+            version, "der %d TradeItem-Module des Profils %s" % (len(module_elements), profile) if profile
+            else "aller TradeItem-Module")
         + "zu einer Datei ohne targetNamespace zusammengeführt (tools/build_cin_flat_xsd.py). "
         + "Namespace-qualifizierte Elemente der Original-Nachricht siehe Lobster/README.md."
     )
@@ -264,8 +316,8 @@ def main():
     etree.cleanup_namespaces(schema, top_nsmap=NS)
     etree.indent(schema, space="    ")
 
-    os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
-    etree.ElementTree(schema).write(OUT_FILE, xml_declaration=True, encoding="UTF-8", pretty_print=True)
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
+    etree.ElementTree(schema).write(out_file, xml_declaration=True, encoding="UTF-8", pretty_print=True)
 
     # 9. Namespace-Tabelle: welche Elemente in der echten GDSN-Nachricht qualifiziert sind
     def prefix(ns):
@@ -278,12 +330,12 @@ def main():
     ]
     for ns, name in sorted(module_elements, key=lambda x: x[1].lower()):
         rows.append((name, ".../tradeItemInformation/extension/%s und .../componentInformation/extension/%s" % (name, name), prefix(ns), ns))
-    with open(NS_FILE, "w", encoding="utf-8") as f:
+    with open(ns_file, "w", encoding="utf-8") as f:
         f.write("element;pfad;praefix;namespace\n")
         for r in rows:
             f.write(";".join(r) + "\n")
 
-    print("Geschrieben:", os.path.relpath(OUT_FILE, ROOT_DIR), "-", len(keep), "Typen,", len(module_elements), "Module")
+    print("Geschrieben:", os.path.relpath(out_file, ROOT_DIR), "-", len(keep), "Typen,", len(module_elements), "Module")
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ Entpackter Inhalt von `BMS_Package_GDSN_Catalogue_Item_Sync_July2026.zip` (Origi
 | `HTML Sample/` | HTML-Darstellung der Beispiel-Instanzen |
 | `TableOfContents.txt` | Inhaltsverzeichnis des Implementers Packet (inkl. Schema-Versionen) |
 | `Lobster/` | **CIN als eine XSD-Datei für Lobster_data** inkl. SBDH und aller Module, siehe `Lobster/README.md` |
+| `Lobster/storck/` | **Profil Storck:** flache CIN-XSD nur mit den Modulen aus `Lobster/storck/modules.txt`, siehe `Lobster/storck/README.md` |
 | `tools/`, `tests/` | Skripte zum Erzeugen der flachen XSD, zur Prüfung gegen die Beispiel-CIN und zum Vergleich neuer Releases |
 | `reports/` | Prüfberichte neuer Releases (`tools/check_release.py`) |
 | `docs/` | BMS-Dokument (PDF), ReadMe und Inhaltsverzeichnis des Gesamtpakets |
@@ -36,11 +37,12 @@ Wenn GS1 ein neues Release der GDSN-Nachrichten (Catalogue Item Sync) veröffent
      - **JA**: inhaltliche Änderung im CIN-Umfang oder ein neues/entferntes Modul. Die Gründe werden aufgelistet.
      - **OPTIONAL**: im CIN-Umfang haben sich nur Dokumentationstexte geändert, die Struktur in Lobster bleibt gleich.
      - **NEIN**: keine Änderung im CIN-Umfang.
+   - dieselbe Entscheidung **je Modul-Profil** (z. B. `Lobster/storck/modules.txt`), bezogen nur auf die gelisteten Module, plus **FEHLER**, wenn ein Modul der Liste im neuen Release fehlt, und Hinweise auf neue GS1-Module.
 3. **Release übernehmen:**
    ```
    python3 tools/check_release.py <neues-Release>.zip --apply
    ```
-   Das ersetzt `Schemas/`, `Instance File/`, `HTML Sample/`, `TableOfContents.txt` und `docs/` durch das neue Release. Ist die CIN betroffen, werden automatisch `tools/build_cin_flat_xsd.py` (neue `Lobster/CatalogueItemNotification_flat.xsd` und `Lobster/namespaces.csv`) und `tests/check_cin_flat.py` (Prüfung gegen die neue Beispiel-CIN) ausgeführt.
+   Das ersetzt `Schemas/`, `Instance File/`, `HTML Sample/`, `TableOfContents.txt` und `docs/` durch das neue Release. Ist die CIN betroffen, werden automatisch `tools/build_cin_flat_xsd.py` (neue `Lobster/CatalogueItemNotification_flat.xsd` und `Lobster/namespaces.csv`) und `tests/check_cin_flat.py` (Prüfung gegen die neue Beispiel-CIN) ausgeführt; für betroffene Profile `tools/build_cin_flat_xsd.py --profile …` und `tests/check_profiles.py`.
 4. **Committen:** neues Release-ZIP, übernommene Dateien, die neue flache XSD und den Bericht unter `reports/`. Das alte Release-ZIP kann gelöscht werden; es bleibt über die Git-Historie erreichbar.
 5. **In Lobster:** Bei **JA** die neue `Lobster/CatalogueItemNotification_flat.xsd` in Lobster_data einlesen und die betroffenen Mappings anhand der CIN-Zeilen im Bericht anpassen.
 
