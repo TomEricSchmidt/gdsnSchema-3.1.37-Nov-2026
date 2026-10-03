@@ -5,7 +5,7 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 | Nr. | Thema | Status |
 |---|---|---|
 | 1 | `isReload` aus MSGFN oder INITIAL_LOAD | offen |
-| 2 | `gdsnValidEnd`: Datum ohne Uhrzeit, CIN braucht `dateTime` | offen |
+| 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | offen, Favorit: Uhrzeit bereits beim MATMAS-Import |
 
 ## 1. `isReload`: MSGFN oder INITIAL_LOAD?
 
@@ -18,7 +18,7 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 
 **Entscheidung:** offen
 
-## 2. `gdsnValidEnd`: Datum ohne Uhrzeit
+## 2. Datum ohne Uhrzeit: `gdsnValidEnd` und `tradeItemSynchronisationDates`
 
 **Frage:** `gdsnValidEnd` enthält nur ein Datum, in der CIN-Nachricht wird hier aber auch eine Uhrzeit benötigt. Im alten Mapping wurde die Uhrzeit per `concat` angefügt. Gesucht ist eine bessere Lösung; eventuell muss die newPIM-Entität angepasst werden.
 
@@ -38,4 +38,32 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 
 Mögliche Empfehlung: **A + C**. Zu klären ist dabei, welche Uhrzeit und Zeitzone der Datenpool für „gültig bis“ erwartet.
 
-**Entscheidung:** offen
+### Ergänzung: auch `tradeItemSynchronisationDates` betroffen
+
+Das Problem mit der fehlenden Uhrzeit tritt in der CIN auch in der Attributgruppe `tradeItem/tradeItemSynchronisationDates` auf. Alle Elemente dort sind `xsd:dateTime`:
+
+| Element | Pflicht |
+|---|---|
+| `lastChangeDateTime` | ja |
+| `cancelledDateTime` | nein |
+| `communityVisibilityDateTime` | nein |
+| `discontinuedDateTime` | nein |
+| `effectiveDateTime` | nein |
+| `publicationDateTime` | nein |
+| `udidFirstPublicationDateTime` | nein |
+
+**Bevorzugte Lösung (Favorit):** Die Quellfelder in newPIM um die Uhrzeit erweitern, und zwar bereits beim Import aus dem ERP. Die Erweiterung wird im Mapping vom MATMAS-IDoc in die newPIM-Entität eingebaut. Dann liefert newPIM fertige `dateTime`-Werte, und das CIN-Mapping kann 1:1 übernehmen – ohne `concat` in jedem Ausgangsmapping.
+
+Dafür nötig:
+
+1. **newPIM-Entität `newpimsdm`:** Datentyp der betroffenen Datumsfelder auf `format: date-time` umstellen (u. a. `gdsnDaten.gdsnValidEnd`; die Quellfelder für `tradeItemSynchronisationDates` noch zuordnen).
+2. **Lobster-Mapping `000-P1-MATMAS-ERP_to_newPIM-SDM`:** die Datumsfelder aus dem MATMAS-IDoc als `dateTime` mit Uhrzeit (und Zeitzone) in die Entität schreiben.
+
+Zu klären:
+
+- Liefert das MATMAS-IDoc zu den Datumsfeldern eine Uhrzeit mit? Falls nicht, wird die Uhrzeit im Mapping `000-P1-MATMAS-ERP_to_newPIM-SDM` festgelegt – dann aber zentral an einer Stelle statt in jedem Ausgangsmapping.
+- Welche Uhrzeit und Zeitzone gelten je Feld (z. B. „gültig bis“ = Ende des Tages)?
+- Bestandsdaten in newPIM: einmalig migrieren oder per Neuimport aus dem ERP aktualisieren?
+- Welche weiteren Mappings lesen die umgestellten Felder und müssen angepasst werden?
+
+**Entscheidung:** offen (Favorit: Uhrzeit bereits beim MATMAS-Import ergänzen)
