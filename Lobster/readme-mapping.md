@@ -5,7 +5,7 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 | Nr. | Thema | Status |
 |---|---|---|
 | 1 | `isReload` aus MSGFN oder INITIAL_LOAD | offen |
-| 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | in Umsetzung: Entität in DEV und LIVE umgestellt, Mapping-Anpassung läuft (Sergej) |
+| 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | erledigt: Entität in DEV und LIVE umgestellt, Mapping 000-P1 angepasst |
 | 3 | `tradeItemUnitDescriptorCode` aus ZZMEE: Ermittlung in die SAP-Schnittstelle verlagern | offen, Favorit: neues Feld in der Entität |
 
 ## 1. `isReload`: MSGFN oder INITIAL_LOAD?
@@ -94,9 +94,9 @@ In der newPIM-Entität `newpimsdm`, Gruppe `gdsnDaten`, wurden die drei Felder a
 | `gdsnDaten.gdsnValidStart` („GDSN gültig ab“) | `format: date` | `format: date-time` |
 | `gdsnDaten.gdsnValidEnd` („GDSN gültig bis“) | ohne `format` | `format: date-time` |
 
-- **Mapping `000-P1-MATMAS-ERP_to_newPIM-SDM`:** Anpassung durch Sergej in Arbeit, die Felder werden dann als `dateTime` mit Uhrzeit befüllt.
-- Danach kann das CIN-Mapping die Werte 1:1 übernehmen; das `concat` im Ausgangsmapping entfällt.
-- Punkt 2 ist **erledigt**, sobald die Mapping-Anpassung abgeschlossen ist.
+- **Mapping `000-P1-MATMAS-ERP_to_newPIM-SDM`:** von Sergej angepasst – die Felder werden jetzt als `dateTime` mit Uhrzeit befüllt.
+- Das CIN-Mapping kann die Werte jetzt 1:1 übernehmen; das `concat` im Ausgangsmapping entfällt.
+- **Status: erledigt.**
 - Das newPIM-Backup-Repo (`entity_configs/newpimsdm.json`) zeigt die neuen Datentypen erst nach dem nächsten Export-Import.
 
 ## 3. `tradeItemUnitDescriptorCode`: Ermittlung aus ZZMEE
