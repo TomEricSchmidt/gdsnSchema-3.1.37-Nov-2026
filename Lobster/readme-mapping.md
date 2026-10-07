@@ -5,7 +5,7 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 | Nr. | Thema | Status |
 |---|---|---|
 | 1 | `isReload` aus MSGFN oder INITIAL_LOAD | offen |
-| 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | offen, Favorit: Uhrzeit bereits beim MATMAS-Import |
+| 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | in Umsetzung: Entität in DEV und LIVE umgestellt, Mapping-Anpassung läuft (Sergej) |
 | 3 | `tradeItemUnitDescriptorCode` aus ZZMEE: Ermittlung in die SAP-Schnittstelle verlagern | offen, Favorit: neues Feld in der Entität |
 
 ## 1. `isReload`: MSGFN oder INITIAL_LOAD?
@@ -67,7 +67,37 @@ Zu klären:
 - Bestandsdaten in newPIM: einmalig migrieren oder per Neuimport aus dem ERP aktualisieren?
 - Welche weiteren Mappings lesen die umgestellten Felder und müssen angepasst werden?
 
-**Entscheidung:** offen (Favorit: Uhrzeit bereits beim MATMAS-Import ergänzen)
+**Entscheidung:** Uhrzeit bereits beim MATMAS-Import ergänzen (Favorit umgesetzt, siehe unten).
+
+### Umsetzung (Stand 07.10.2026)
+
+In der newPIM-Entität `newpimsdm`, Gruppe `gdsnDaten`, wurden die drei Felder auf `date-time` umgestellt – **im DEV- und im LIVE-System**:
+
+```json
+"gdsnStartDate": {
+  "type": "string",
+  "format": "date-time"
+},
+"gdsnValidStart": {
+  "type": "string",
+  "format": "date-time"
+},
+"gdsnValidEnd": {
+  "type": "string",
+  "format": "date-time"
+}
+```
+
+| Feld | vorher | jetzt |
+|---|---|---|
+| `gdsnDaten.gdsnStartDate` | `format: date` | `format: date-time` |
+| `gdsnDaten.gdsnValidStart` („GDSN gültig ab“) | `format: date` | `format: date-time` |
+| `gdsnDaten.gdsnValidEnd` („GDSN gültig bis“) | ohne `format` | `format: date-time` |
+
+- **Mapping `000-P1-MATMAS-ERP_to_newPIM-SDM`:** Anpassung durch Sergej in Arbeit, die Felder werden dann als `dateTime` mit Uhrzeit befüllt.
+- Danach kann das CIN-Mapping die Werte 1:1 übernehmen; das `concat` im Ausgangsmapping entfällt.
+- Punkt 2 ist **erledigt**, sobald die Mapping-Anpassung abgeschlossen ist.
+- Das newPIM-Backup-Repo (`entity_configs/newpimsdm.json`) zeigt die neuen Datentypen erst nach dem nächsten Export-Import.
 
 ## 3. `tradeItemUnitDescriptorCode`: Ermittlung aus ZZMEE
 
