@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 1 | Datentyp `date` → `date-time` für GDSN Startdatum, GDSN gültig ab, GDSN gültig bis | Entität `newpimsdm`, Mapping SAP → newPIM | umgesetzt (07.10.2026) |
 | 2 | Neues Feld `tradeItemUnitDescriptorCode` | Entität `newpimsdm`, Mapping SAP → newPIM | umgesetzt (09.10.2026) |
-| 3 | `tradeItemContactInformation`: Inverkehrbringer immer aus `CONTACT_AD` | CIN-Mapping | umgesetzt (09.10.2026) |
+| 3 | `tradeItemContactInformation`: Inverkehrbringer immer aus `CONTACT_AD`; `tradeItemContact-gln#7` nicht mehr gefüllt | CIN-Mapping | umgesetzt (09.10.2026) |
 
 ## 1. Datentyp von `date` auf `date-time` umgestellt
 
@@ -32,4 +32,5 @@ Betroffene Felder in der Entität `newpimsdm`, Gruppe `gdsnDaten` (DEV- und LIVE
 ## 3. `tradeItemContactInformation`: Inverkehrbringer
 
 - Für den Inverkehrbringer wird jetzt immer der Kontakt mit `ISPECFLD-2 = CONTACT_AD` verwendet.
+- Das Feld `tradeItemContact-gln#7` wird nicht mehr gefüllt.
 - Ziel in der CIN: `tradeItem/tradeItemContactInformation`.
