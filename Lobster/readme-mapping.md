@@ -6,7 +6,7 @@ Offene Punkte und Entscheidungen zum Lobster-Mapping auf `CatalogueItemNotificat
 |---|---|---|
 | 1 | `isReload` aus MSGFN oder INITIAL_LOAD | offen |
 | 2 | Datum ohne Uhrzeit (`gdsnValidEnd`, `tradeItemSynchronisationDates`), CIN braucht `dateTime` | erledigt: Entität in DEV und LIVE umgestellt, Mapping 000-P1 angepasst |
-| 3 | `tradeItemUnitDescriptorCode` aus ZZMEE: Ermittlung in die SAP-Schnittstelle verlagern | offen, Favorit: neues Feld in der Entität |
+| 3 | `tradeItemUnitDescriptorCode` aus ZZMEE: Ermittlung in die SAP-Schnittstelle verlagern | erledigt: neues Feld in der Entität, Ermittlung im Mapping SAP → newPIM |
 
 ## 1. `isReload`: MSGFN oder INITIAL_LOAD?
 
@@ -123,4 +123,12 @@ Zu klären:
 - Zuordnungstabelle ZZMEE → GDSN-Code aus dem alten Mapping übernehmen und hier dokumentieren.
 - Name und Ort des neuen Felds in der Entität; Befüllung der Bestandsdaten.
 
-**Entscheidung:** offen (Favorit: Ermittlung beim Import, neues Feld in der Entität)
+**Entscheidung:** Ermittlung beim Import, neues Feld in der Entität (Favorit umgesetzt).
+
+### Umsetzung (Stand 09.10.2026)
+
+- Neues Feld `tradeItemUnitDescriptorCode` in der newPIM-Entität.
+- Im Mapping von SAP an newPIM wird entschieden, welcher Code in das Feld kommt; die Auswertung von ZZMEE im CIN-Mapping entfällt.
+- Das CIN-Mapping übernimmt den Wert 1:1 nach `tradeItem/tradeItemUnitDescriptorCode`.
+- Siehe auch `readme-change-log.md`, Eintrag 2.
+- **Status: erledigt.**
